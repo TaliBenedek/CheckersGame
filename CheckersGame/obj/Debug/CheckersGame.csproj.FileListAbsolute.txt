@@ -1,0 +1,10 @@
+C:\Users\talib\source\repos\CheckersGame\CheckersGame\bin\Debug\CheckersGame.exe.config
+C:\Users\talib\source\repos\CheckersGame\CheckersGame\bin\Debug\CheckersGame.exe
+C:\Users\talib\source\repos\CheckersGame\CheckersGame\bin\Debug\CheckersGame.pdb
+C:\Users\talib\source\repos\CheckersGame\CheckersGame\obj\Debug\CheckersGame.csprojAssemblyReference.cache
+C:\Users\talib\source\repos\CheckersGame\CheckersGame\obj\Debug\CheckersGame.Form1.resources
+C:\Users\talib\source\repos\CheckersGame\CheckersGame\obj\Debug\CheckersGame.Properties.Resources.resources
+C:\Users\talib\source\repos\CheckersGame\CheckersGame\obj\Debug\CheckersGame.csproj.GenerateResource.cache
+C:\Users\talib\source\repos\CheckersGame\CheckersGame\obj\Debug\CheckersGame.csproj.CoreCompileInputs.cache
+C:\Users\talib\source\repos\CheckersGame\CheckersGame\obj\Debug\CheckersGame.exe
+C:\Users\talib\source\repos\CheckersGame\CheckersGame\obj\Debug\CheckersGame.pdb
