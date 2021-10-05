@@ -32,14 +32,8 @@ namespace CheckersGame
                     labelGrid[i, j].Height = labelSize;
                     labelGrid[i, j].Width = labelSize;
                     labelGrid[i, j].Click += labelGridClick;
-                    if ((i + j) % 2 == 0)
-                    {
-                        labelGrid[i, j].BackColor = Color.Red;
-                    }
-                    else
-                    {
-                        labelGrid[i, j].BackColor = Color.Black;
-                    }
+                    Color color = (i + j) % 2 == 0 ? Color.Red : Color.Black;
+                    labelGrid[i, j].BackColor = color;
 
                     panel1.Controls.Add(labelGrid[i, j]);
 
