@@ -40,6 +40,33 @@ namespace CheckersGame
                     labelGrid[i, j].Location = new Point(i * labelSize, j * labelSize);
                 }
             }
+
+            //Image blackPiece = Image.FromFile("C:/Users/user1/OneDrive/Documents/Fall 2021/Practicum in Software Development/Checkers/CheckersGame/blackPiece.jpg");
+           
+
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 8; col++)
+                {
+                    if (labelGrid[col, row].BackColor == Color.Black)
+                    {
+                        //labelGrid[col, row].Image = blackPiece;
+                        labelGrid[col, row].Image = new Bitmap(Image.FromFile("C:/Users/user1/OneDrive/Documents/Fall 2021/Practicum in Software Development/whitePiece.jpg"), labelGrid[col, row].Size);
+                    }
+                }
+            }
+            for (int row =5; row <8; row++)
+            {
+                for (int col = 0; col <8; col++)
+                {
+                    if (labelGrid[col, row].BackColor == Color.Black) 
+                    {
+                        //labelGrid[col, row].Image = blackPiece;
+                        labelGrid[col, row].Image = new Bitmap(Image.FromFile("C:/Users/user1/OneDrive/Documents/Fall 2021/Practicum in Software Development/redPiece.jpg"), labelGrid[col, row].Size);
+                    }
+                }
+            }
+
         }
 
         static void labelGridClick(object sender, EventArgs e)
