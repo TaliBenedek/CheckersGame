@@ -17,6 +17,7 @@ namespace CheckersGame
         {
             InitializeComponent();
             populateGrid();
+            comboBox1.SelectedIndex = 0;
         }
 
         private void populateGrid()
@@ -32,7 +33,7 @@ namespace CheckersGame
                     labelGrid[i, j].Height = labelSize;
                     labelGrid[i, j].Width = labelSize;
                     labelGrid[i, j].Click += labelGridClick;
-                    Color color = (i + j) % 2 == 0 ? Color.Red : Color.Black;
+                    Color color = (i + j) % 2 == 0 ? Color.Tan : Color.Black;
                     labelGrid[i, j].BackColor = color;
 
                     panel1.Controls.Add(labelGrid[i, j]);
@@ -40,8 +41,6 @@ namespace CheckersGame
                     labelGrid[i, j].Location = new Point(i * labelSize, j * labelSize);
                 }
             }
-
-            //Image blackPiece = Image.FromFile("C:/Users/user1/OneDrive/Documents/Fall 2021/Practicum in Software Development/Checkers/CheckersGame/blackPiece.jpg");
            
 
             for (int row = 0; row < 3; row++)
@@ -50,8 +49,7 @@ namespace CheckersGame
                 {
                     if (labelGrid[col, row].BackColor == Color.Black)
                     {
-                        //labelGrid[col, row].Image = blackPiece;
-                        labelGrid[col, row].Image = new Bitmap(Image.FromFile("C:/Users/user1/OneDrive/Documents/Fall 2021/Practicum in Software Development/whitePiece.jpg"), labelGrid[col, row].Size);
+                        labelGrid[col, row].Image = new Bitmap(Image.FromFile("C:/Users/user1/OneDrive/Documents/Fall 2021/Practicum in Software Development/creamPiece.jpg"), labelGrid[col, row].Size);
                     }
                 }
             }
@@ -61,8 +59,7 @@ namespace CheckersGame
                 {
                     if (labelGrid[col, row].BackColor == Color.Black) 
                     {
-                        //labelGrid[col, row].Image = blackPiece;
-                        labelGrid[col, row].Image = new Bitmap(Image.FromFile("C:/Users/user1/OneDrive/Documents/Fall 2021/Practicum in Software Development/redPiece.jpg"), labelGrid[col, row].Size);
+                        labelGrid[col, row].Image = new Bitmap(Image.FromFile("C:/Users/user1/OneDrive/Documents/Fall 2021/Practicum in Software Development/maroonPiece.jpg"), labelGrid[col, row].Size);
                     }
                 }
             }
@@ -89,6 +86,26 @@ namespace CheckersGame
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
         {
 
         }
