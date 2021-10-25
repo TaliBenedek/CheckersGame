@@ -43,26 +43,7 @@ namespace CheckersGame
             }
            
 
-            for (int row = 0; row < 3; row++)
-            {
-                for (int col = 0; col < 8; col++)
-                {
-                    if (labelGrid[col, row].BackColor == Color.Black)
-                    {
-                        labelGrid[col, row].Image = new Bitmap(Image.FromFile("C:/Users/user1/OneDrive/Documents/Fall 2021/Practicum in Software Development/creamPiece.jpg"), labelGrid[col, row].Size);
-                    }
-                }
-            }
-            for (int row =5; row <8; row++)
-            {
-                for (int col = 0; col <8; col++)
-                {
-                    if (labelGrid[col, row].BackColor == Color.Black) 
-                    {
-                        labelGrid[col, row].Image = new Bitmap(Image.FromFile("C:/Users/user1/OneDrive/Documents/Fall 2021/Practicum in Software Development/maroonPiece.jpg"), labelGrid[col, row].Size);
-                    }
-                }
-            }
+           
 
         }
 
@@ -109,5 +90,52 @@ namespace CheckersGame
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+           if (whiteButton.Checked)
+            {
+                setComputer(redPiece.Image);
+                setPlayer(whitePiece.Image);
+            }
+            else
+            {
+                setComputer(whitePiece.Image);
+                setPlayer(redPiece.Image);
+            }
+        }
+
+        public void setComputer(Image userPiece)
+        {
+            // set top, computer
+            for (int row = 0; row < 3; row++)
+            {
+                for (int col = 0; col < 8; col++)
+                {
+                    if (labelGrid[col, row].BackColor == Color.Black)
+                    {
+                        labelGrid[col, row].Image = new Bitmap(userPiece, labelGrid[col, row].Size);
+
+                    }
+                }
+            }
+        }
+
+        public void setPlayer(Image compPiece)
+        {
+            //set bottom, player
+            for (int row = 5; row < 8; row++)
+            {
+                for (int col = 0; col < 8; col++)
+                {
+                    if (labelGrid[col, row].BackColor == Color.Black)
+                    {
+                        labelGrid[col, row].Image = new Bitmap(compPiece, labelGrid[col, row].Size);
+                    }
+                }
+            }
+        }
+
     }
 }
