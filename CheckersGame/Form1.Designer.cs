@@ -29,14 +29,20 @@ namespace CheckersGame
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.panel1 = new System.Windows.Forms.Panel();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.redButton = new System.Windows.Forms.RadioButton();
+            this.whiteButton = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.startButton = new System.Windows.Forms.Button();
+            this.whitePiece = new System.Windows.Forms.PictureBox();
+            this.redPiece = new System.Windows.Forms.PictureBox();
             this.panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.whitePiece)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.redPiece)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -60,28 +66,28 @@ namespace CheckersGame
             this.comboBox1.TabIndex = 1;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // radioButton1
+            // redButton
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(3, 31);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(74, 29);
-            this.radioButton1.TabIndex = 2;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "red";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.redButton.AutoSize = true;
+            this.redButton.Checked = true;
+            this.redButton.Location = new System.Drawing.Point(3, 31);
+            this.redButton.Name = "redButton";
+            this.redButton.Size = new System.Drawing.Size(74, 29);
+            this.redButton.TabIndex = 2;
+            this.redButton.TabStop = true;
+            this.redButton.Text = "red";
+            this.redButton.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // whiteButton
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(94, 31);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(93, 29);
-            this.radioButton2.TabIndex = 3;
-            this.radioButton2.Text = "white";
-            this.radioButton2.UseVisualStyleBackColor = true;
-            this.radioButton2.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
+            this.whiteButton.AutoSize = true;
+            this.whiteButton.Location = new System.Drawing.Point(94, 31);
+            this.whiteButton.Name = "whiteButton";
+            this.whiteButton.Size = new System.Drawing.Size(93, 29);
+            this.whiteButton.TabIndex = 3;
+            this.whiteButton.Text = "white";
+            this.whiteButton.UseVisualStyleBackColor = true;
+            this.whiteButton.CheckedChanged += new System.EventHandler(this.radioButton2_CheckedChanged);
             // 
             // label1
             // 
@@ -107,18 +113,51 @@ namespace CheckersGame
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.radioButton2);
-            this.panel2.Controls.Add(this.radioButton1);
+            this.panel2.Controls.Add(this.whiteButton);
+            this.panel2.Controls.Add(this.redButton);
             this.panel2.Location = new System.Drawing.Point(892, 370);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(200, 100);
             this.panel2.TabIndex = 7;
+            // 
+            // startButton
+            // 
+            this.startButton.Font = new System.Drawing.Font("Tahoma", 10.125F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startButton.Location = new System.Drawing.Point(926, 529);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(135, 67);
+            this.startButton.TabIndex = 8;
+            this.startButton.Text = "START";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // whitePiece
+            // 
+            this.whitePiece.Image = ((System.Drawing.Image)(resources.GetObject("whitePiece.Image")));
+            this.whitePiece.Location = new System.Drawing.Point(799, 623);
+            this.whitePiece.Name = "whitePiece";
+            this.whitePiece.Size = new System.Drawing.Size(97, 46);
+            this.whitePiece.TabIndex = 9;
+            this.whitePiece.TabStop = false;
+            this.whitePiece.Visible = false;
+            // 
+            // redPiece
+            // 
+            this.redPiece.Image = ((System.Drawing.Image)(resources.GetObject("redPiece.Image")));
+            this.redPiece.Location = new System.Drawing.Point(1008, 623);
+            this.redPiece.Name = "redPiece";
+            this.redPiece.Size = new System.Drawing.Size(100, 50);
+            this.redPiece.TabIndex = 10;
+            this.redPiece.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1230, 681);
+            this.Controls.Add(this.redPiece);
+            this.Controls.Add(this.whitePiece);
+            this.Controls.Add(this.startButton);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -130,6 +169,8 @@ namespace CheckersGame
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.whitePiece)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.redPiece)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -139,11 +180,14 @@ namespace CheckersGame
 
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.RadioButton redButton;
+        private System.Windows.Forms.RadioButton whiteButton;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.PictureBox whitePiece;
+        private System.Windows.Forms.PictureBox redPiece;
     }
 }
 
