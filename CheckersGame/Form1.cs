@@ -41,7 +41,7 @@ namespace CheckersGame
                     labelGrid[i, j].Location = new Point(i * labelSize, j * labelSize);
                 }
             }
-           
+          
 
            
 
@@ -91,7 +91,7 @@ namespace CheckersGame
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void startButton_Click(object sender, EventArgs e)
         {
 
            if (whiteButton.Checked)
