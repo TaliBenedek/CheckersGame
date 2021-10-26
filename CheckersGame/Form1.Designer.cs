@@ -129,7 +129,7 @@ namespace CheckersGame
             this.startButton.TabIndex = 8;
             this.startButton.Text = "START";
             this.startButton.UseVisualStyleBackColor = true;
-            this.startButton.Click += new System.EventHandler(this.button1_Click);
+            this.startButton.Click += new System.EventHandler(this.startButton_Click);
             // 
             // whitePiece
             // 
@@ -149,6 +149,7 @@ namespace CheckersGame
             this.redPiece.Size = new System.Drawing.Size(100, 50);
             this.redPiece.TabIndex = 10;
             this.redPiece.TabStop = false;
+            this.redPiece.Visible = false;
             // 
             // Form1
             // 
