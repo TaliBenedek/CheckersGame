@@ -25,20 +25,20 @@ namespace CheckersGame
             int labelSize = panel1.Width / 8;
             panel1.Height = panel1.Width;
 
-            for(int i = 0; i < 8; i++)
+            for(int col = 0; col < 8; col++)
             {
-                for(int j = 0; j < 8; j++)
+                for(int row = 0; row < 8; row++)
                 {
-                    labelGrid[i, j] = new Label();
-                    labelGrid[i, j].Height = labelSize;
-                    labelGrid[i, j].Width = labelSize;
-                    labelGrid[i, j].Click += labelGridClick;
-                    Color color = (i + j) % 2 == 0 ? Color.Tan : Color.Black;
-                    labelGrid[i, j].BackColor = color;
+                    labelGrid[col, row] = new Label();
+                    labelGrid[col, row].Height = labelSize;
+                    labelGrid[col, row].Width = labelSize;
+                    labelGrid[col, row].Click += labelGridClick;
+                    Color color = (col + row) % 2 == 0 ? Color.Tan : Color.Black;
+                    labelGrid[col, row].BackColor = color;
 
-                    panel1.Controls.Add(labelGrid[i, j]);
+                    panel1.Controls.Add(labelGrid[col, row]);
 
-                    labelGrid[i, j].Location = new Point(i * labelSize, j * labelSize);
+                    labelGrid[col, row].Location = new Point(col * labelSize, row * labelSize);
                 }
             }
           
@@ -50,16 +50,16 @@ namespace CheckersGame
         static void labelGridClick(object sender, EventArgs e)
         {
             int col = 0;
-            int row = 0;
+            int row = 0;                        
             for (int i = 0; i < 8; i++)
             {
                 for (int j = 0; j < 8; j++)
                 {
                     Label clickedLabel = (Label)sender;
                     if (clickedLabel.Equals(labelGrid[i, j]))
-                    {
-                        col = i;
+                    {                   
                         row = j;
+                        col = i;
                     }
                 }
             }

@@ -26,14 +26,28 @@ namespace CheckersGame
             }
         }
 
-        public void SetUpBoard()
+        public void SetUpBoard(PieceColor computerColor, PieceColor playerColor)
         {
             for (int column = 0; column < COLUMNS; column++)
             {
-                int rowWhite = 1;
-                int rowBlack = 6;
-                squares[column, rowWhite].Piece = (new RegularPiece(new Location(rowWhite, column), PieceColor.White));
-                squares[column, rowBlack].Piece = (new RegularPiece(new Location(rowBlack, column), PieceColor.Red));
+                int firstRow = 0;
+                int secondRow = 1;
+                int thirdRow = 2;
+                int sixthRow = 5;
+                int seventhRow = 6;
+                int eighthRow = 7;
+                if (column % 2 == 0)
+                {
+                    squares[column, secondRow].Piece = (new RegularPiece(new Location(secondRow, column), computerColor));
+                    squares[column, sixthRow].Piece = (new RegularPiece(new Location(sixthRow, column), playerColor));
+                    squares[column, eighthRow].Piece = (new RegularPiece(new Location(eighthRow, column), playerColor));
+                }
+                else
+                {
+                    squares[column, firstRow].Piece = (new RegularPiece(new Location(firstRow, column), computerColor));
+                    squares[column, thirdRow].Piece = (new RegularPiece(new Location(thirdRow, column), computerColor));
+                    squares[column, seventhRow].Piece = (new RegularPiece(new Location(seventhRow, column), playerColor));
+                }
             }
         }
     }
