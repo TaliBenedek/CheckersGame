@@ -26,7 +26,7 @@ namespace CheckersGame
             }
         }
 
-        public void SetUpBoard(Color computerColor, Color playerColor)
+        public void SetUpBoard(PieceColor computerColor, PieceColor playerColor)
         {
             for (int column = 0; column < COLUMNS; column++)
             {
@@ -42,15 +42,15 @@ namespace CheckersGame
 
                 if (column % 2 == 0)
                 {
-                    squares[column, secondRow].Piece = (new RegularPiece(new Location(secondRow, column), computerColor, PlayerType.Player.Computer));
-                    squares[column, sixthRow].Piece = (new RegularPiece(new Location(sixthRow, column), playerColor, PlayerType.Player.User));
-                    squares[column, eighthRow].Piece = (new RegularPiece(new Location(eighthRow, column), playerColor, PlayerType.Player.User));
+                    squares[column, secondRow].Piece = new Piece(new Location(secondRow, column), computerColor, Player.Computer, false);
+                    squares[column, sixthRow].Piece = new Piece(new Location(sixthRow, column), playerColor, Player.User, false);
+                    squares[column, eighthRow].Piece = new Piece(new Location(eighthRow, column), playerColor, Player.User, false);
                 }
                 else
                 {
-                    squares[column, firstRow].Piece = (new RegularPiece(new Location(firstRow, column), computerColor, PlayerType.Player.Computer));
-                    squares[column, thirdRow].Piece = (new RegularPiece(new Location(thirdRow, column), computerColor, PlayerType.Player.Computer));
-                    squares[column, seventhRow].Piece = (new RegularPiece(new Location(seventhRow, column), playerColor, PlayerType.Player.User));
+                    squares[column, firstRow].Piece = new Piece(new Location(firstRow, column), computerColor, Player.Computer,false);
+                    squares[column, thirdRow].Piece = new Piece(new Location(thirdRow, column), computerColor, Player.Computer, false);
+                    squares[column, seventhRow].Piece = new Piece(new Location(seventhRow, column), playerColor, Player.User, false);
                 }
             }
         }

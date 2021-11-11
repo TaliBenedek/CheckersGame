@@ -5,13 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace CheckersGame
-{
-    class PlayerType
-    {
-        public enum Player
+{ 
+    public enum PieceColor
         {
-            Computer,
-            User
+            Red,
+            White
         }
-    }
 }

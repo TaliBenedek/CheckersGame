@@ -9,7 +9,7 @@ namespace CheckersGame
     class Square
     {
         public  Location Location { get; }
-        public AbstractPiece Piece { get; set; }
+        public Piece Piece { get; set; }
 
         public Square(Location location)
         {
