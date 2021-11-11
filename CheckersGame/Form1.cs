@@ -33,7 +33,7 @@ namespace CheckersGame
                     labelGrid[col, row].Height = labelSize;
                     labelGrid[col, row].Width = labelSize;
                     labelGrid[col, row].Click += labelGridClick;
-                    Color color = (col + row) % 2 == 0 ? Color.Tan : Color.Black;
+                    System.Drawing.Color color = (col + row) % 2 == 0 ? System.Drawing.Color.Tan : System.Drawing.Color.Black;
                     labelGrid[col, row].BackColor = color;
 
                     panel1.Controls.Add(labelGrid[col, row]);
@@ -113,7 +113,7 @@ namespace CheckersGame
             {
                 for (int col = 0; col < 8; col++)
                 {
-                    if (labelGrid[col, row].BackColor == Color.Black)
+                    if (labelGrid[col, row].BackColor == System.Drawing.Color.Black)
                     {
                         labelGrid[col, row].Image = new Bitmap(userPiece, labelGrid[col, row].Size);
 
@@ -129,7 +129,7 @@ namespace CheckersGame
             {
                 for (int col = 0; col < 8; col++)
                 {
-                    if (labelGrid[col, row].BackColor == Color.Black)
+                    if (labelGrid[col, row].BackColor == System.Drawing.Color.Black)
                     {
                         labelGrid[col, row].Image = new Bitmap(compPiece, labelGrid[col, row].Size);
                     }

@@ -8,6 +8,11 @@ namespace CheckersGame
 {
     class Board
     {
+        public enum Player
+        {
+            Computer,
+            Human
+        }
         private const int COLUMNS = 8;
         private const int ROWS = 8;
         private Square[,] squares = new Square[COLUMNS, ROWS];
@@ -26,7 +31,7 @@ namespace CheckersGame
             }
         }
 
-        public void SetUpBoard(PieceColor computerColor, PieceColor playerColor)
+        public void SetUpBoard(Color computerColor, Color playerColor)
         {
             for (int column = 0; column < COLUMNS; column++)
             {

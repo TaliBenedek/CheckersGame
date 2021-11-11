@@ -7,20 +7,18 @@ using System.Threading.Tasks;
 
 namespace CheckersGame
 {
-    public enum PieceColor
-    {
-        Red,
-        White
-    }
+    
     abstract class AbstractPiece
     {
         public Location Location { get; set; } 
-        public PieceColor Color { get; } 
+        public Color Color { get; } 
+        public PlayerType.Player Player { get; }
 
-    public AbstractPiece(Location location, PieceColor color)
+    public AbstractPiece(Location location, Color color, PlayerType.Player player)
         {
             this.Location = location;
             this.Color = color;
+            this.Player = player;
         }
 
     public override bool Equals(Object o)

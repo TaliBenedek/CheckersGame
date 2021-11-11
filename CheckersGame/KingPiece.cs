@@ -9,7 +9,7 @@ namespace CheckersGame
 {
     class KingPiece : AbstractPiece
     {
-        public KingPiece(Location location, PieceColor color) : base(location, color)
+        public KingPiece(Location location, Color color, PlayerType.Player player) : base(location, color, player)
         {
         }
 
