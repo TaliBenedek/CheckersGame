@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CheckersGame
 {
-    class Location
+    public class Location
     {
         public int Row { get; }
         public int Column { get; }

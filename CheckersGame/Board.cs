@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CheckersGame
 {
-    class Board
+    public class Board
     {
         private const int COLUMNS = 8;
         private const int ROWS = 8;
@@ -48,11 +48,70 @@ namespace CheckersGame
                 }
                 else
                 {
-                    squares[column, firstRow].Piece = new Piece(new Location(firstRow, column), computerColor, Player.Computer,false);
+                    squares[column, firstRow].Piece = new Piece(new Location(firstRow, column), computerColor, Player.Computer, false);
                     squares[column, thirdRow].Piece = new Piece(new Location(thirdRow, column), computerColor, Player.Computer, false);
                     squares[column, seventhRow].Piece = new Piece(new Location(seventhRow, column), playerColor, Player.User, false);
                 }
             }
         }
+
+        public bool IsGameOver()
+        {
+            /*
+             * TO DO
+             * return true or false if game is over at current position
+             * 
+             * 
+             */
+
+            return false;
+        }
+
+        public double GetHeuristicValue()
+        {
+            /*
+             * TO DO
+             * evaluate current board
+             * (number of pieces left, weight kings>pawns, number of legal moves left
+             */
+            return 0.0;
+        }
+        //do we have a move class? or just acess through x,y coordinates?
+        public Move[] GetLegalMoves(Player currentPlayer) //needs current board and player
+        {
+            return null;
+        }
+
+        public Board PlayMove(Move potentialMove)
+        {
+            /*
+             * TO DO
+             * play provided move
+             * return new board 
+             */
+            return null;
+        }
+
+        public Move GetComputersMove()
+        {
+            int depth; //set based on difficulty level
+            double alfa = -1;
+            double beta = 1;
+            double highestValue = -1; //?
+            Move bestMove = null;
+            for (Move potentialMove : GetLegalMoves())
+            {
+                Board newBoard = currentBoard.PlayMove(potentialMove);
+                double boardValue = newBoard.GetAlphaBetaValue();
+                if (boardValue > highestValue)
+                {
+                    bestMove = potentialMove;
+                    highestValue = boardValue;
+                }
+
+            }
+            return bestMove;
+        }
+
     }
 }

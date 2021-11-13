@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace CheckersGame
 {
-    class AlphaBeta
+    public class Player
     {
+        //TO DO
     }
-}
+    public class AlphaBeta
+    {
+        public static double GetAlphaBetaValue(Board board, int depth, double alfa, double beta, Player player)
+        {
+
+        }
+    }
+
