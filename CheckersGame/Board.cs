@@ -105,7 +105,7 @@ namespace CheckersGame
             for (int index = 0; index < potentialMoves.Length; index++)
             {
                 Board newBoard = currentBoard.PlayMove(potentialMoves[0]);
-                double boardValue = AlphaBeta.GetAlphaBetaValue(currentBoard, depth, alpha, beta, currentPlayer);
+                double boardValue = AlphaBeta.GetAlphaBetaValue(this, depth, alpha, beta, currentPlayer);
                 //double boardValue = newBoard.GetAlphaBetaValue();
                 if (boardValue > highestValue)
                 {
