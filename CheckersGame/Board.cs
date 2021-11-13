@@ -92,20 +92,24 @@ namespace CheckersGame
             return null;
         }
 
-        public Move GetComputersMove()
+        public Move GetComputersMove() 
+            //pass current player? current player should be a field in this class, updated throughout the game
+            // same idea for current board?
         {
-            int depth; //set based on difficulty level
-            double alfa = -1;
+            int depth = 3; //TO DO: set based on difficulty level
+            double alpha = -1;
             double beta = 1;
             double highestValue = -1; //?
             Move bestMove = null;
-            for (Move potentialMove : GetLegalMoves())
+            Move[] potentialMoves = GetLegalMoves(currentPlayer);
+            for (int index = 0; index < potentialMoves.Length; index++)
             {
-                Board newBoard = currentBoard.PlayMove(potentialMove);
-                double boardValue = newBoard.GetAlphaBetaValue();
+                Board newBoard = currentBoard.PlayMove(potentialMoves[0]);
+                double boardValue = AlphaBeta.GetAlphaBetaValue(currentBoard, depth, alpha, beta, currentPlayer);
+                //double boardValue = newBoard.GetAlphaBetaValue();
                 if (boardValue > highestValue)
                 {
-                    bestMove = potentialMove;
+                    bestMove = potentialMoves[index];
                     highestValue = boardValue;
                 }
 
