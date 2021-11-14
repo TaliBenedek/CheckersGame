@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CheckersGame
 {
-    class Move
+    public class Move
     {
         public Location From { get; }
         public Location To { get; }
