@@ -6,10 +6,6 @@ using System.Threading.Tasks;
 
 namespace CheckersGame
 {
-    public class Player
-    {
-        //TO DO (extract) 
-    }
     public class AlphaBeta
     {
         public static double GetAlphaBetaValue(Board board, int depth, double alpha, double beta, Player player)
@@ -61,10 +57,9 @@ namespace CheckersGame
                         }
                     }
                     value = beta;
-                }               
+                }
             }
             return value;
         }
     }
 }
-
