@@ -11,14 +11,14 @@ namespace CheckersGame
     {
         public Location Location { get; set; }
         public PieceColor Color { get; }
-        public Player Player { get; }
-        bool king;
+        public Player Gamer { get; }
+        public bool King { get; set; }
         public Piece(Location location, PieceColor color, Player player, bool king)
         {
             this.Location = location;
             this.Color = color;
-            this.Player = player;
-            this.king = king;
+            this.Gamer = player;
+            this.King = king;
         }
 
         public List<Move> GetMoves()
@@ -27,9 +27,9 @@ namespace CheckersGame
             int currentRow = this.Location.Row;
             int currentCol = this.Location.Column;
 
-            if(Player == Player.User)
+            if(Gamer == Player.User)
             {
-                if (king == true)
+                if (King == true)
                 {
                     KingMoves(moves, currentRow, currentCol);
                 }
@@ -41,7 +41,7 @@ namespace CheckersGame
             else //if computer
             {
                 
-                if(king == true)
+                if(King == true)
                 {
                     KingMoves(moves, currentRow, currentCol);
                 }
@@ -91,6 +91,11 @@ namespace CheckersGame
         {
             UserRegularMoves(moves, currentRow, currentCol);
             ComputerRegularMoves(moves, currentRow, currentCol);
+        }
+
+        public Piece Copy()
+        {
+            return new Piece(this.Location, this.Color, this.Gamer, this.King);
         }
     }
 
