@@ -105,7 +105,7 @@ namespace CheckersGame
                             List<Move> computerMoves = squares[i,j].Piece.GetMoves();
                             foreach(Move move in computerMoves)
                             {
-                                if(isLegal(move))
+                                if(IsLegal(move))
                                 {
                                     legalMoves.Add(move);
                                 }
@@ -125,7 +125,7 @@ namespace CheckersGame
                             List<Move> userMoves = squares[i,j].Piece.GetMoves();
                             foreach(Move move in userMoves)
                             {
-                                if(isLegal(move))
+                                if(IsLegal(move))
                                 {
                                     legalMoves.Add(move);
                                 }
@@ -138,7 +138,7 @@ namespace CheckersGame
             return legalMovesArray;
         }
 
-        public bool isLegal(Move move) 
+        public bool IsLegal(Move move) 
         {
             //check if destination of move is empty
             if(squares[move.To.Row,move.To.Column].HasPiece())
