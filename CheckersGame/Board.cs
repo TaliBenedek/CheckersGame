@@ -85,8 +85,6 @@ namespace CheckersGame
         public Board PlayMove(Move move)
         {
             Board newBoard = CopyBoard();
-            if (IsLegal(move))
-            {
                 Location origin = move.From;
                 Location destination = move.To;
                 Square currentSquare = newBoard.GetSquare(origin);
@@ -96,18 +94,12 @@ namespace CheckersGame
                 currentSquare.Piece = null;
                 currentPiece.Location = destination;
                 destinationSquare.Piece = currentPiece;
-            }
             return newBoard;
         }
 
         private Square GetSquare(Location location)
         {
             return squares[location.Column, location.Row];
-        }
-
-        private bool IsLegal(Move move)
-        {
-            throw new NotImplementedException();
         }
 
         private Board CopyBoard()
