@@ -88,7 +88,7 @@ namespace CheckersGame
              */
             return 0.0;
         }
-        //do we have a move class? or just acess through x,y coordinates?
+        
         public Move[] GetLegalMoves(Player currentPlayer) //needs current board and player
         {
             List<Move> legalMoves = new List<Move>();
