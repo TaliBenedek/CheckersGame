@@ -57,14 +57,26 @@ namespace CheckersGame
 
         public bool IsGameOver()
         {
-            /*
-             * TO DO
-             * return true or false if game is over at current position
-             * 
-             * 
-             */
-
-            return false;
+            int numRed = 0;
+            int numWhite = 0;
+            for(int i = 0; i < ROWS; i++)
+            {
+                for(int j = 0; j< COLUMNS; j++)
+                {
+                    if(squares[i,j].HasPiece())
+                    {
+                        if(squares[i,j].Piece.Color.Equals(PieceColor.Red))
+                        {
+                            numRed++;
+                        }
+                        else
+                        {
+                            numWhite++;
+                        }
+                    }
+                }
+            }
+            return numRed == 0 || numWhite == 0;
         }
 
         public double GetHeuristicValue()
@@ -79,7 +91,61 @@ namespace CheckersGame
         //do we have a move class? or just acess through x,y coordinates?
         public Move[] GetLegalMoves(Player currentPlayer) //needs current board and player
         {
-            return null;
+            List<Move> legalMoves = new List<Move>();
+            if(currentPlayer.Equals(Player.Computer))
+            {
+                for(int i = 0; i < ROWS; i++)
+                {
+                    for(int j = 0; j < COLUMNS; j++)
+                    {
+                        //if there is a piece of the computer on the square
+                        if(squares[i, j].HasPiece() && squares[i,j].Piece.Player.Equals(Player.Computer))
+                        {
+                            //check if legal and add to legalMoves
+                            List<Move> computerMoves = squares[i,j].Piece.GetMoves();
+                            foreach(Move move in computerMoves)
+                            {
+                                if(isLegal(move))
+                                {
+                                    legalMoves.Add(move);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            else if(currentPlayer.Equals(Player.User))
+            {
+                for(int i = 0; i < ROWS; i++)
+                {
+                    for(int j = 0; j < COLUMNS; j++)
+                    {
+                        if(squares[i, j].HasPiece() && squares[i,j].Piece.Player.Equals(Player.User))
+                        {
+                            List<Move> userMoves = squares[i,j].Piece.GetMoves();
+                            foreach(Move move in userMoves)
+                            {
+                                if(isLegal(move))
+                                {
+                                    legalMoves.Add(move);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            Move[] legalMovesArray = legalMoves.ToArray();
+            return legalMovesArray;
+        }
+
+        public bool isLegal(Move move) 
+        {
+            //check if destination of move is empty
+            if(squares[move.To.Row,move.To.Column].HasPiece())
+            {
+                return false;
+            }
+            return true;
         }
 
         public Board PlayMove(Move potentialMove)
