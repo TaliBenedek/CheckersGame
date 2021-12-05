@@ -81,12 +81,13 @@ namespace CheckersGame
 
         public double GetHeuristicValue()
         {
-            /*
-             * TO DO
-             * evaluate current board
-             * (number of pieces left, weight kings>pawns, number of legal moves left
-             */
-            return 0.0;
+            int  legalMovesLeft = this.GetLegalMoves(currentPlayer).Length; //need a way to keep track of current player
+            int piecesOnBoard = 0; //to do: count all pieces left on board (wieght this player's pieces more? only count this player's?)
+            int nrKings = 0;  //to do:  count how many of those are kings (this player's kings? )
+            //arbitrary calculation, will adjust considerably once it can be tested
+            //value needs to be between -1 and 1, so change math
+            double value = ((piecesOnBoard + nrKings) * .05) + (1 / legalMovesLeft);
+            return value;
         }
         
         public Move[] GetLegalMoves(User currentPlayer) //needs current board and player
