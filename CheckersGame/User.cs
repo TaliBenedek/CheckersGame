@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace CheckersGame
 {  
-    public enum Player
+    public enum User
         {
             Computer,
-            User
+            Human
         }
     
 }

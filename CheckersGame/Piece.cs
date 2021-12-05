@@ -11,13 +11,13 @@ namespace CheckersGame
     {
         public Location Location { get; set; }
         public PieceColor Color { get; }
-        public Player Gamer { get; }
+        public User Player { get; }
         public bool King { get; set; }
-        public Piece(Location location, PieceColor color, Player player, bool king)
+        public Piece(Location location, PieceColor color, User player, bool king)
         {
             this.Location = location;
             this.Color = color;
-            this.Gamer = player;
+            this.Player = player;
             this.King = king;
         }
 
@@ -27,7 +27,7 @@ namespace CheckersGame
             int currentRow = this.Location.Row;
             int currentCol = this.Location.Column;
 
-            if(Gamer == Player.User)
+            if(Player == CheckersGame.User.Human)
             {
                 if (King == true)
                 {
@@ -95,7 +95,7 @@ namespace CheckersGame
 
         public Piece Copy()
         {
-            return new Piece(this.Location, this.Color, this.Gamer, this.King);
+            return new Piece(this.Location, this.Color, this.Player, this.King);
         }
     }
 
