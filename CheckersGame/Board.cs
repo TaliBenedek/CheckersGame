@@ -42,15 +42,15 @@ namespace CheckersGame
 
                 if (column % 2 == 0)
                 {
-                    squares[column, secondRow].Piece = new Piece(new Location(secondRow, column), computerColor, Player.Computer, false);
-                    squares[column, sixthRow].Piece = new Piece(new Location(sixthRow, column), playerColor, Player.User, false);
-                    squares[column, eighthRow].Piece = new Piece(new Location(eighthRow, column), playerColor, Player.User, false);
+                    squares[column, secondRow].Piece = new Piece(new Location(secondRow, column), computerColor, User.Computer, false);
+                    squares[column, sixthRow].Piece = new Piece(new Location(sixthRow, column), playerColor, User.Human, false);
+                    squares[column, eighthRow].Piece = new Piece(new Location(eighthRow, column), playerColor, User.Human, false);
                 }
                 else
                 {
-                    squares[column, firstRow].Piece = new Piece(new Location(firstRow, column), computerColor, Player.Computer, false);
-                    squares[column, thirdRow].Piece = new Piece(new Location(thirdRow, column), computerColor, Player.Computer, false);
-                    squares[column, seventhRow].Piece = new Piece(new Location(seventhRow, column), playerColor, Player.User, false);
+                    squares[column, firstRow].Piece = new Piece(new Location(firstRow, column), computerColor, User.Computer, false);
+                    squares[column, thirdRow].Piece = new Piece(new Location(thirdRow, column), computerColor, User.Computer, false);
+                    squares[column, seventhRow].Piece = new Piece(new Location(seventhRow, column), playerColor, User.Human, false);
                 }
             }
         }
@@ -89,17 +89,17 @@ namespace CheckersGame
             return 0.0;
         }
         
-        public Move[] GetLegalMoves(Player currentPlayer) //needs current board and player
+        public Move[] GetLegalMoves(User currentPlayer) //needs current board and player
         {
             List<Move> legalMoves = new List<Move>();
-            if(currentPlayer.Equals(Player.Computer))
+            if(currentPlayer.Equals(User.Computer))
             {
                 for(int i = 0; i < ROWS; i++)
                 {
                     for(int j = 0; j < COLUMNS; j++)
                     {
                         //if there is a piece of the computer on the square
-                        if(squares[i, j].HasPiece() && squares[i,j].Piece.Player.Equals(Player.Computer))
+                        if(squares[i, j].HasPiece() && squares[i,j].Piece.Player.Equals(User.Computer))
                         {
                             //check if legal and add to legalMoves
                             List<Move> computerMoves = squares[i,j].Piece.GetMoves();
@@ -114,13 +114,13 @@ namespace CheckersGame
                     }
                 }
             }
-            else if(currentPlayer.Equals(Player.User))
+            else if(currentPlayer.Equals(User.Human))
             {
                 for(int i = 0; i < ROWS; i++)
                 {
                     for(int j = 0; j < COLUMNS; j++)
                     {
-                        if(squares[i, j].HasPiece() && squares[i,j].Piece.Player.Equals(Player.User))
+                        if(squares[i, j].HasPiece() && squares[i,j].Piece.Player.Equals(User.Human))
                         {
                             List<Move> userMoves = squares[i,j].Piece.GetMoves();
                             foreach(Move move in userMoves)
