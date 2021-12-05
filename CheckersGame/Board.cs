@@ -148,14 +148,42 @@ namespace CheckersGame
             return true;
         }
 
-        public Board PlayMove(Move potentialMove)
+        public Board PlayMove(Move move)
         {
-            /*
-             * TO DO
-             * play provided move
-             * return new board 
-             */
-            return null;
+            Board newBoard = CopyBoard();
+                Location origin = move.From;
+                Location destination = move.To;
+                Square currentSquare = newBoard.GetSquare(origin);
+                Square destinationSquare = newBoard.GetSquare(destination);
+                Piece currentPiece = currentSquare.Piece;
+
+                currentSquare.Piece = null;
+                currentPiece.Location = destination;
+                destinationSquare.Piece = currentPiece;
+            return newBoard;
+        }
+
+        private Square GetSquare(Location location)
+        {
+            return squares[location.Column, location.Row];
+        }
+
+        private Board CopyBoard()
+        {
+            Board copy = new Board();
+            for (int column = 0; column < squares.Length; column++)
+            {
+                for (int row = 0; row < squares.Length; row++)
+                {
+                    Square thisSquare = squares[column, row];
+                    Piece thisPiece = thisSquare.Piece;
+
+                    Square copySquare = copy.squares[column, row];
+                    Piece copyPiece = thisPiece == null ? null : thisPiece.Copy();
+                    copySquare.Piece = copyPiece;
+                }
+            }
+            return copy;
         }
 
         public Move GetComputersMove() 
