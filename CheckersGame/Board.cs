@@ -78,19 +78,35 @@ namespace CheckersGame
             }
             return numRed == 0 || numWhite == 0;
         }
-
+        //value of board shouldn't change based on current player, but human is min player, comp is max player
+        //change algorithm to reflect that 
         public double GetHeuristicValue()
         {
-            int  legalMovesLeft = this.GetLegalMoves(currentPlayer).Length; //need a way to keep track of current player
-            int piecesOnBoard = 0; //to do: count all pieces left on board (wieght this player's pieces more? only count this player's?)
-            int nrKings = 0;  //to do:  count how many of those are kings (this player's kings? )
+            
+            int legalMovesLeft = this.GetLegalMoves(User.Computer).Length + this.GetLegalMoves(User.Human).Length;
+            int piecesOnBoard = 0;
+            int nrKings = 0;
+            for (int i = 0; i < ROWS; i++)
+            {
+                for (int j = 0; j < COLUMNS; j++)
+                {
+                    if (squares[i, j].HasPiece())
+                    {
+                        piecesOnBoard++; 
+                        if (squares[i, j].Piece.King)
+                        {
+                            nrKings ++; 
+                        }
+                    }
+                }
+            }
             //arbitrary calculation, will adjust considerably once it can be tested
             //value needs to be between -1 and 1, so change math
             double value = ((piecesOnBoard + nrKings) * .05) + (1 / legalMovesLeft);
             return value;
         }
         
-        public Move[] GetLegalMoves(User currentPlayer) //needs current board and player
+        public Move[] GetLegalMoves(User currentPlayer) //needs current player
         {
             List<Move> legalMoves = new List<Move>();
             if(currentPlayer.Equals(User.Computer))
@@ -196,11 +212,11 @@ namespace CheckersGame
             double beta = 1;
             double highestValue = -1; //?
             Move bestMove = null;
-            Move[] potentialMoves = GetLegalMoves(currentPlayer);
+            Move[] potentialMoves = GetLegalMoves(User.Computer);
             for (int index = 0; index < potentialMoves.Length; index++)
             {
-                Board newBoard = currentBoard.PlayMove(potentialMoves[0]);
-                double boardValue = AlphaBeta.GetAlphaBetaValue(this, depth, alpha, beta, currentPlayer);
+                Board newBoard = this.PlayMove(potentialMoves[0]);
+                double boardValue = AlphaBeta.GetAlphaBetaValue(this, depth, alpha, beta, User.Computer);
                 //double boardValue = newBoard.GetAlphaBetaValue();
                 if (boardValue > highestValue)
                 {
