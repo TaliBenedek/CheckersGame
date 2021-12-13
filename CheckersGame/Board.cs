@@ -78,34 +78,100 @@ namespace CheckersGame
             }
             return numRed == 0 || numWhite == 0;
         }
-        //value of board shouldn't change based on current player, but human is min player, comp is max player
-        //change algorithm to reflect that 
+
         public double GetHeuristicValue()
         {
-            
-            int legalMovesLeft = this.GetLegalMoves(User.Computer).Length + this.GetLegalMoves(User.Human).Length;
-            int piecesOnBoard = 0;
-            int nrKings = 0;
+            double heuristicValue = 0;
+            //computer is max, human is min
+
+            //to do: determine winner method
+            if (IsGameOver())
+            {
+                String winner = DetermineWinner();
+                heuristicValue = winner switch
+                {
+                    "user" => -1,
+                    "computer" => 1,
+                    "tie" => 0,
+                    _ => heuristicValue
+                };
+
+            }
+
+            int legalMovesLeft = GetLegalMoves(User.Computer).Length + this.GetLegalMoves(User.Human).Length;
+            int humansPiecesOnBoard = 0;
+            int computersPiecesOnBoard = 0;
+            int nrHumansKings = 0;
+            int nrComputersKings = 0;
+            for (int i = 0; i < ROWS; i++)
+            {
+                for (int j = 0; j < COLUMNS; j++)
+                {
+                    Square curSquare = squares[i, j];
+                    if (curSquare.HasPiece())
+                    {
+                        if(curSquare.Piece.Player == User.Human)
+                        {
+                            humansPiecesOnBoard++;
+                            if (curSquare.Piece.King)
+                            {
+                                nrHumansKings++;
+                            } 
+
+                        }
+                        else
+                        {
+                            computersPiecesOnBoard++;
+                            if (curSquare.Piece.King)
+                            {
+                                nrComputersKings++;
+                            }
+
+                        }
+
+                    }
+                }
+                int totalPieces = humansPiecesOnBoard + computersPiecesOnBoard;
+            }
+            //arbitrary calculation, will adjust considerably once it can be tested 
+            heuristicValue += (nrComputersKings + computersPiecesOnBoard) * (1 / legalMovesLeft);
+            heuristicValue -= (nrHumansKings + humansPiecesOnBoard) * (1 / legalMovesLeft);
+
+            return heuristicValue;
+        }
+
+        private string DetermineWinner()
+        //crude method, repetitive to isGameOver method, need to know if user or comp is red etc
+        {
+            int numRed = 0;
+            int numWhite = 0;
             for (int i = 0; i < ROWS; i++)
             {
                 for (int j = 0; j < COLUMNS; j++)
                 {
                     if (squares[i, j].HasPiece())
                     {
-                        piecesOnBoard++; 
-                        if (squares[i, j].Piece.King)
+                        if (squares[i, j].Piece.Color.Equals(PieceColor.Red))
                         {
-                            nrKings ++; 
+                            numRed++;
+                        }
+                        else
+                        {
+                            numWhite++;
                         }
                     }
                 }
             }
-            //arbitrary calculation, will adjust considerably once it can be tested
-            //value needs to be between -1 and 1, so change math
-            double value = ((piecesOnBoard + nrKings) * .05) + (1 / legalMovesLeft);
-            return value;
+            if (numRed > numWhite)
+            {
+                return "red player";
+            }
+            else
+            {
+                return "white player";
+            }
         }
-        
+
         public Move[] GetLegalMoves(User currentPlayer) //needs current player
         {
             List<Move> legalMoves = new List<Move>();
