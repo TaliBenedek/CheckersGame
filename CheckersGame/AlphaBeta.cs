@@ -6,9 +6,15 @@ using System.Threading.Tasks;
 
 namespace CheckersGame
 {
+    //remove this class, just to allow me to use enum (not showing up in files, git issue?) 
+    public enum User
+    {
+        Computer, //Max 
+        Human // Min
+    }
     public class AlphaBeta
     {
-        public static double GetAlphaBetaValue(Board board, int depth, double alpha, double beta, Player player)
+        public static double GetAlphaBetaValue(Board board, int depth, double alpha, double beta, User player)
         {
             double value;
             if (depth == 0) //reached end of tree
@@ -21,8 +27,8 @@ namespace CheckersGame
             }
             else
             {
-                Player opponent = player == Player.Max ? Player.Min : Player.Max;
-                if (player == Player.Max)//computer's turn
+                User opponent = player == User.Computer ? User.Human : User.Computer;
+                if (player == User.Computer)
                 {
                     Move[] potentialMoves = board.GetLegalMoves(player);
                     for (int index = 0; index < potentialMoves.Length; index++)

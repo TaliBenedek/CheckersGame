@@ -42,15 +42,15 @@ namespace CheckersGame
 
                 if (column % 2 == 0)
                 {
-                    squares[column, secondRow].Piece = new Piece(new Location(secondRow, column), computerColor, Player.Computer, false);
-                    squares[column, sixthRow].Piece = new Piece(new Location(sixthRow, column), playerColor, Player.User, false);
-                    squares[column, eighthRow].Piece = new Piece(new Location(eighthRow, column), playerColor, Player.User, false);
+                    squares[column, secondRow].Piece = new Piece(new Location(secondRow, column), computerColor, User.Computer, false);
+                    squares[column, sixthRow].Piece = new Piece(new Location(sixthRow, column), playerColor, User.Human, false);
+                    squares[column, eighthRow].Piece = new Piece(new Location(eighthRow, column), playerColor, User.Human, false);
                 }
                 else
                 {
-                    squares[column, firstRow].Piece = new Piece(new Location(firstRow, column), computerColor, Player.Computer, false);
-                    squares[column, thirdRow].Piece = new Piece(new Location(thirdRow, column), computerColor, Player.Computer, false);
-                    squares[column, seventhRow].Piece = new Piece(new Location(seventhRow, column), playerColor, Player.User, false);
+                    squares[column, firstRow].Piece = new Piece(new Location(firstRow, column), computerColor, User.Computer, false);
+                    squares[column, thirdRow].Piece = new Piece(new Location(thirdRow, column), computerColor, User.Computer, false);
+                    squares[column, seventhRow].Piece = new Piece(new Location(seventhRow, column), playerColor, User.Human, false);
                 }
             }
         }
@@ -81,25 +81,108 @@ namespace CheckersGame
 
         public double GetHeuristicValue()
         {
-            /*
-             * TO DO
-             * evaluate current board
-             * (number of pieces left, weight kings>pawns, number of legal moves left
-             */
-            return 0.0;
+            double heuristicValue = 0;
+            //computer is max, human is min
+
+            //to do: determine winner method
+            if (IsGameOver())
+            {
+                String winner = DetermineWinner();
+                heuristicValue = winner switch
+                {
+                    "user" => -1,
+                    "computer" => 1,
+                    "tie" => 0,
+                    _ => heuristicValue
+                };
+
+            }
+
+            int legalMovesLeft = GetLegalMoves(User.Computer).Length + this.GetLegalMoves(User.Human).Length;
+            int humansPiecesOnBoard = 0;
+            int computersPiecesOnBoard = 0;
+            int nrHumansKings = 0;
+            int nrComputersKings = 0;
+            for (int i = 0; i < ROWS; i++)
+            {
+                for (int j = 0; j < COLUMNS; j++)
+                {
+                    Square curSquare = squares[i, j];
+                    if (curSquare.HasPiece())
+                    {
+                        if(curSquare.Piece.Player == User.Human)
+                        {
+                            humansPiecesOnBoard++;
+                            if (curSquare.Piece.King)
+                            {
+                                nrHumansKings++;
+                            } 
+
+                        }
+                        else
+                        {
+                            computersPiecesOnBoard++;
+                            if (curSquare.Piece.King)
+                            {
+                                nrComputersKings++;
+                            }
+
+                        }
+
+                    }
+                }
+                int totalPieces = humansPiecesOnBoard + computersPiecesOnBoard;
+            }
+            //arbitrary calculation, will adjust considerably once it can be tested 
+            heuristicValue += (nrComputersKings + computersPiecesOnBoard) * (1 / legalMovesLeft);
+            heuristicValue -= (nrHumansKings + humansPiecesOnBoard) * (1 / legalMovesLeft);
+
+            return heuristicValue;
         }
-        
-        public Move[] GetLegalMoves(Player currentPlayer) //needs current board and player
+
+        private string DetermineWinner()
+        //crude method, repetitive to isGameOver method, need to know if user or comp is red etc
+        {
+            int numRed = 0;
+            int numWhite = 0;
+            for (int i = 0; i < ROWS; i++)
+            {
+                for (int j = 0; j < COLUMNS; j++)
+                {
+                    if (squares[i, j].HasPiece())
+                    {
+                        if (squares[i, j].Piece.Color.Equals(PieceColor.Red))
+                        {
+                            numRed++;
+                        }
+                        else
+                        {
+                            numWhite++;
+                        }
+                    }
+                }
+            }
+            if (numRed > numWhite)
+            {
+                return "red player";
+            }
+            else
+            {
+                return "white player";
+            }
+        }
+
+        public Move[] GetLegalMoves(User currentPlayer) //needs current player
         {
             List<Move> legalMoves = new List<Move>();
-            if(currentPlayer.Equals(Player.Computer))
+            if(currentPlayer.Equals(User.Computer))
             {
                 for(int i = 0; i < ROWS; i++)
                 {
                     for(int j = 0; j < COLUMNS; j++)
                     {
                         //if there is a piece of the computer on the square
-                        if(squares[i, j].HasPiece() && squares[i,j].Piece.Player.Equals(Player.Computer))
+                        if(squares[i, j].HasPiece() && squares[i,j].Piece.Player.Equals(User.Computer))
                         {
                             //check if legal and add to legalMoves
                             List<Move> computerMoves = squares[i,j].Piece.GetMoves();
@@ -114,13 +197,13 @@ namespace CheckersGame
                     }
                 }
             }
-            else if(currentPlayer.Equals(Player.User))
+            else if(currentPlayer.Equals(User.Human))
             {
                 for(int i = 0; i < ROWS; i++)
                 {
                     for(int j = 0; j < COLUMNS; j++)
                     {
-                        if(squares[i, j].HasPiece() && squares[i,j].Piece.Player.Equals(Player.User))
+                        if(squares[i, j].HasPiece() && squares[i,j].Piece.Player.Equals(User.Human))
                         {
                             List<Move> userMoves = squares[i,j].Piece.GetMoves();
                             foreach(Move move in userMoves)
@@ -195,11 +278,11 @@ namespace CheckersGame
             double beta = 1;
             double highestValue = -1; //?
             Move bestMove = null;
-            Move[] potentialMoves = GetLegalMoves(currentPlayer);
+            Move[] potentialMoves = GetLegalMoves(User.Computer);
             for (int index = 0; index < potentialMoves.Length; index++)
             {
-                Board newBoard = currentBoard.PlayMove(potentialMoves[0]);
-                double boardValue = AlphaBeta.GetAlphaBetaValue(this, depth, alpha, beta, currentPlayer);
+                Board newBoard = this.PlayMove(potentialMoves[0]);
+                double boardValue = AlphaBeta.GetAlphaBetaValue(this, depth, alpha, beta, User.Computer);
                 //double boardValue = newBoard.GetAlphaBetaValue();
                 if (boardValue > highestValue)
                 {
